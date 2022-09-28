@@ -53,16 +53,12 @@ export const TransactionForm = ({ value, onDismiss }) => {
         })
       );
 
-      console.log('saved transaction to DB: ', res);
-
       const latestChildData = await DataStore.query(Child, child.id);
       res = await DataStore.save(
         Child.copyOf(latestChildData, (item) => {
           item.balance = item.balance + res.amount;
         })
       );
-
-      console.log('updated balance for child in DB: ', res);
 
       setResult('success');
       setFormState(initialState);

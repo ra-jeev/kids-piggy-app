@@ -23,7 +23,6 @@ export function Dashboard() {
     const observeUser = () => {
       return DataStore.observeQuery(User, Predicates.ALL).subscribe(
         (snapshot) => {
-          console.log('got user data: ', snapshot);
           if (snapshot.items && snapshot.items.length) {
             if (!snapshot.items[0].onBoarded) {
               navigate('/onboarding');
@@ -35,7 +34,6 @@ export function Dashboard() {
       );
     };
 
-    console.log('inside useEffect for user: ', userSubscription.current);
     if (!userSubscription.current) {
       userSubscription.current = observeUser();
     }
@@ -44,13 +42,12 @@ export function Dashboard() {
       userSubscription.current.unsubscribe();
       userSubscription.current = null;
     };
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     const observeChildren = () => {
       return DataStore.observeQuery(Child, Predicates.ALL).subscribe(
         (snapshot) => {
-          console.log('got children data: ', snapshot);
           setChildren([...snapshot.items]);
         }
       );
@@ -71,8 +68,6 @@ export function Dashboard() {
       return DataStore.observeQuery(Transaction, Predicates.ALL, {
         sort: (s) => s.createdAt(SortDirection.DESCENDING),
       }).subscribe((snapshot) => {
-        console.log('got transaction data: ', snapshot);
-
         setTransactions([...snapshot.items]);
       });
     };

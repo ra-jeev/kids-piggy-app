@@ -39,8 +39,6 @@ export function OnBoarding() {
     const observeUser = () => {
       return DataStore.observeQuery(User, Predicates.ALL).subscribe(
         (snapshot) => {
-          console.log('got user data: ', snapshot);
-
           if (snapshot.items && snapshot.items.length) {
             if (snapshot.items[0].onBoarded) {
               navigate('/dashboard');
@@ -52,7 +50,6 @@ export function OnBoarding() {
       );
     };
 
-    console.log('inside useEffect for user: ', userSubscription.current);
     if (!userSubscription.current) {
       userSubscription.current = observeUser();
     }
@@ -61,7 +58,7 @@ export function OnBoarding() {
       userSubscription.current.unsubscribe();
       userSubscription.current = null;
     };
-  }, []);
+  }, [navigate]);
 
   const finishOnBoarding = async () => {
     let hasError = false;
@@ -86,12 +83,10 @@ export function OnBoarding() {
       hasError = true;
     }
 
-    if (hasError) {
+    if (hasError || !children.length) {
       return;
     }
 
-    // const userData = await DataStore.query(User, user.attributes.sub);
-    // console.log('fetched user details: ', userData);
     await DataStore.save(
       User.copyOf(userData, (item) => {
         item.currency = currency.value;
@@ -113,7 +108,6 @@ export function OnBoarding() {
       }
 
       const res = await DataStore.save(new Child(childData));
-      console.log('child save res: ', res);
       if (childData.balance) {
         await DataStore.save(
           new Transaction({
@@ -238,7 +232,9 @@ export function OnBoarding() {
               </Heading>
               <Collection
                 items={children}
-                searchNoResultsFound='Please add at least one kid'
+                searchNoResultsFound={
+                  <Text variation='error'>Please add at least one kid</Text>
+                }
               >
                 {(item, index) => (
                   <AddChild

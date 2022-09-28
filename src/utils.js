@@ -53,7 +53,6 @@ const calculateNextPayout = (schedule) => {
       nextMoneyDate.setUTCMonth(currMonth + 1, 1);
     }
 
-    console.log(`nextMoneyDate: `, nextMoneyDate);
     return nextMoneyDate;
   }
 

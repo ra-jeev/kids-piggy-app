@@ -16,13 +16,11 @@ export const Settings = () => {
     const observeUser = () => {
       return DataStore.observeQuery(User, Predicates.ALL).subscribe(
         (snapshot) => {
-          console.log('got user data: ', snapshot);
           setUserData(snapshot.items[0]);
         }
       );
     };
 
-    console.log('inside useEffect for user: ', userSubscription.current);
     if (!userSubscription.current) {
       userSubscription.current = observeUser();
     }
@@ -37,13 +35,11 @@ export const Settings = () => {
     const observeChildren = () => {
       return DataStore.observeQuery(Child, Predicates.ALL).subscribe(
         (snapshot) => {
-          console.log('got children data: ', snapshot);
           setChildren([...snapshot.items]);
         }
       );
     };
 
-    console.log('inside useEffect for children', childrenSubscription.current);
     if (!childrenSubscription.current) {
       childrenSubscription.current = observeChildren();
     }
