@@ -1,0 +1,91 @@
+{
+  "version": "1",
+  "cognitoConfig": {
+    "identityPoolName": "testAuthIdentityPool",
+    "allowUnauthenticatedIdentities": false,
+    "resourceNameTruncated": "piggyza5b671b3",
+    "userPoolName": "PiggyzApp",
+    "autoVerifiedAttributes": [
+      "email"
+    ],
+    "mfaConfiguration": "OFF",
+    "mfaTypes": [
+      "SMS Text Message"
+    ],
+    "smsAuthenticationMessage": "Your authentication code is {####}",
+    "smsVerificationMessage": "Your verification code is {####}",
+    "emailVerificationSubject": "Your verification code for Kids Piggy App",
+    "emailVerificationMessage": "<div style=\"font-size: 1rem\">Hi,<br />Welcome to Kids Piggy App.<br /><br />To confirm your email, please enter the following verification code on the code verification screen of your device.<br /><br />Your Verification Code: <span style=\"font-size: 1.5rem; font-weight: 500\">{####}</span><br /><br />Thanks,<br />Team Kids Piggy App</div>",
+    "defaultPasswordPolicy": false,
+    "passwordPolicyMinLength": 8,
+    "passwordPolicyCharacters": [
+      "Requires Lowercase",
+      "Requires Numbers",
+      "Requires Symbols",
+      "Requires Uppercase"
+    ],
+    "requiredAttributes": [
+      "email",
+      "name"
+    ],
+    "aliasAttributes": [],
+    "userpoolClientGenerateSecret": false,
+    "userpoolClientRefreshTokenValidity": 30,
+    "userpoolClientWriteAttributes": [],
+    "userpoolClientReadAttributes": [],
+    "userpoolClientLambdaRole": "Piggyza5b671b3_userpoolclient_lambda_role",
+    "userpoolClientSetAttributes": false,
+    "sharedId": "a5b671b3",
+    "resourceName": "PiggyzApp",
+    "authSelections": "identityPoolAndUserPool",
+    "serviceName": "Cognito",
+    "usernameAttributes": [
+      "email"
+    ],
+    "useDefault": "manual",
+    "userPoolGroups": false,
+    "userPoolGroupList": [],
+    "adminQueries": false,
+    "thirdPartyAuth": false,
+    "authProviders": [],
+    "usernameCaseSensitive": false,
+    "useEnabledMfas": true,
+    "authRoleArn": {
+      "Fn::GetAtt": [
+        "AuthRole",
+        "Arn"
+      ]
+    },
+    "unauthRoleArn": {
+      "Fn::GetAtt": [
+        "UnauthRole",
+        "Arn"
+      ]
+    },
+    "breakCircularDependency": true,
+    "dependsOn": [
+      {
+        "category": "function",
+        "resourceName": "PiggyzAppPostConfirmation",
+        "triggerProvider": "Cognito",
+        "attributes": [
+          "Arn",
+          "Name"
+        ]
+      }
+    ],
+    "triggers": {
+      "PostConfirmation": [
+        "add-to-group"
+      ]
+    },
+    "hostedUI": false,
+    "parentStack": {
+      "Ref": "AWS::StackId"
+    },
+    "permissions": [
+      "{\n  \"policyName\": \"AddToGroupCognito\",\n  \"trigger\": \"PostConfirmation\",\n  \"effect\": \"Allow\",\n  \"actions\": [\n    \"cognito-idp:AdminAddUserToGroup\",\n    \"cognito-idp:GetGroup\",\n    \"cognito-idp:CreateGroup\"\n  ],\n  \"resource\": {\n    \"paramType\": \"!GetAtt\",\n    \"keys\": [\n      \"UserPool\",\n      \"Arn\"\n    ]\n  }\n}"
+    ],
+    "authTriggerConnections": "[\n  {\n    \"triggerType\": \"PostConfirmation\",\n    \"lambdaFunctionName\": \"PiggyzAppPostConfirmation\"\n  }\n]"
+  }
+}

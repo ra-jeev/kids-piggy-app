@@ -1,3 +1,13 @@
+[data-amplify-theme='app-theme'] {
+  background-color: var(--amplify-colors-background-secondary);
+  color: var(--amplify-colors-font-primary);
+  min-height: 100vh;
+}
+
+.main {
+  min-height: calc(100vh - 4rem);
+}
+
 .App {
   text-align: center;
 }

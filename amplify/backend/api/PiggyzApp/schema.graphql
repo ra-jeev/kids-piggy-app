@@ -1,0 +1,45 @@
+type Transaction @model @auth(rules: [{allow: owner, ownerField: "userID"}]) {
+  id: ID!
+  amount: Float!
+  comment: String!
+  userID: ID! @index(name: "byUser")
+  childID: ID! @index(name: "byChild")
+}
+
+type Child @model @auth(rules: [{allow: owner, ownerField: "userID"}, {allow: private, operations: [read, update, delete], provider: iam}]) {
+  id: ID!
+  name: String!
+  balance: Float!
+  userID: ID! @index(name: "byUser")
+  Transactions: [Transaction] @hasMany(indexName: "byChild", fields: ["id"])
+  pocketMoney: Float
+  schedule: Frequency
+  nextMoneyAt: AWSTimestamp
+}
+
+enum Currency {
+  INR
+  USD
+  EUR
+  GBP
+  SGD
+  AUD
+  CAD
+}
+
+enum Frequency {
+  DAILY
+  WEEKLY
+  MONTHLY
+}
+
+type User @model @auth(rules: [{allow: owner, ownerField: "id"}]) {
+  id: ID!
+  name: String!
+  email: AWSEmail!
+  currency: Currency
+  Transactions: [Child] @hasMany(indexName: "byUser", fields: ["id"])
+  Children: [Child] @hasMany(indexName: "byUser", fields: ["id"])
+  onBoarded: Boolean
+}
+ 

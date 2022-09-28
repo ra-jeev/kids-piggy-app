@@ -1,0 +1,12 @@
+{
+  "AppSyncApiName": "PiggyzApp",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthModeLastUpdated": "2022-09-23T09:20:47.092Z",
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authPiggyzApp",
+      "Outputs.UserPoolId"
+    ]
+  }
+}
