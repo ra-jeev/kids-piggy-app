@@ -38,6 +38,7 @@ export function Home() {
             level={1}
             fontWeight='extrabold'
             fontSize={{ base: '2.5rem', large: '3.5rem' }}
+            color='white'
           >
             Manage your kids{' '}
             <span style={{ color: 'orange' }}>"Piggy Bank"</span>{' '}
@@ -47,6 +48,7 @@ export function Home() {
             level={3}
             marginTop='1rem'
             fontSize={{ base: '1.25rem', large: '1.75rem' }}
+            color='white'
           >
             Track their spends. Configure their pocket money auto credit. Make
             them financially aware.
@@ -156,18 +158,18 @@ export function Home() {
           wrap='wrap'
         >
           <Card padding='1.5rem' width={{ base: '100%', medium: '40%' }}>
-            <FaPercent color='brand.primary.80' fontSize='3rem' />
+            <FaPercent color='#ffc600' fontSize='3rem' />
 
             <Flex direction='column' marginTop='2rem'>
               <Heading level={4}>Give interest on savings</Heading>
               <Text>
-                Become a banker to your kid, and encourage them to save by
-                giving interest on their savings
+                Become a banker to your kid. Give interest on their deposit
+                &amp; incentivize them to save
               </Text>
             </Flex>
           </Card>
           <Card padding='1.5rem' width={{ base: '100%', medium: '40%' }}>
-            <FaTasks color='brand.primary.80' fontSize='3rem' />
+            <FaTasks color='#ffc600' fontSize='3rem' />
 
             <Flex direction='column' marginTop='2rem'>
               <Heading level={4}>Link payout to tasks</Heading>
