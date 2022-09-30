@@ -6,6 +6,7 @@ import {
   Button,
   Card,
   Icon,
+  Link,
 } from '@aws-amplify/ui-react';
 import { useNavigate } from 'react-router-dom';
 import heroImage from '../assets/images/hero-image.png';
@@ -14,7 +15,7 @@ import {
   MdSettingsInputAntenna,
   MdMoney,
 } from 'react-icons/md';
-import { FaPercent, FaTasks } from 'react-icons/fa';
+import { FaPercent, FaTasks, FaHeart } from 'react-icons/fa';
 
 export function Home() {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ export function Home() {
     <Flex direction='column'>
       <Flex
         backgroundImage='linear-gradient(to right, hsl(243, 100%, 69%), hsl(244, 51%, 37%))'
-        padding='5rem 3rem'
+        padding={{ base: '3.5rem 1.5rem', large: '5rem 3rem' }}
         direction={{ base: 'column', medium: 'row' }}
         alignItems='center'
         justifyContent='center'
@@ -73,22 +74,24 @@ export function Home() {
       <Flex
         direction='column'
         alignItems='center'
-        padding='3rem 1rem'
+        padding='1rem'
         justifyContent='center'
       >
         <Heading
           level={2}
           fontSize={{ base: 'xxl', large: 'xxxl' }}
           fontWeight='bold'
+          marginTop='2rem'
         >
-          App Features
+          Key Features
         </Heading>
         <Flex
           width={{ base: '100%', large: '80%' }}
           marginTop='2rem'
           justifyContent='center'
+          wrap='wrap'
         >
-          <Card padding='1.5rem' width={{ base: '100%', medium: '40%' }}>
+          <Card padding='1.5rem' width={{ base: '100%', medium: '33%' }}>
             <Icon
               as={MdSupervisorAccount}
               color='brand.primary.80'
@@ -98,12 +101,12 @@ export function Home() {
             <Flex direction='column' marginTop='2rem'>
               <Heading level={4}>Multiple kids accounts</Heading>
               <Text>
-                You can configure and track multiple piggy bank accounts through
-                the app
+                Configure and track multiple piggy bank accounts for your kids
+                through the app
               </Text>
             </Flex>
           </Card>
-          <Card padding='1.5rem' width={{ base: '100%', medium: '40%' }}>
+          <Card padding='1.5rem' width={{ base: '100%', medium: '33%' }}>
             <Icon
               as={MdSettingsInputAntenna}
               color='brand.primary.80'
@@ -113,19 +116,20 @@ export function Home() {
             <Flex direction='column' marginTop='2rem'>
               <Heading level={4}>Set pocket money schedule</Heading>
               <Text>
-                Set your kids pocket money and its schedule for auto credit to
-                the account
+                Set your kids pocket money schedule for auto credit to their
+                piggy bank account
               </Text>
             </Flex>
           </Card>
 
-          <Card padding='1.5rem' width={{ base: '100%', medium: '40%' }}>
+          <Card padding='1.5rem' width={{ base: '100%', medium: '33%' }}>
             <Icon as={MdMoney} color='brand.primary.80' fontSize='3rem' />
 
             <Flex direction='column' marginTop='2rem'>
               <Heading level={4}>Ad-hoc add / deduct money</Heading>
               <Text>
-                Award them on ad-hoc basis. Track their expenses with comments
+                You can award money on ad-hoc basis, and also track their
+                expenses with comments
               </Text>
             </Flex>
           </Card>
@@ -134,13 +138,14 @@ export function Home() {
       <Flex
         direction='column'
         alignItems='center'
-        padding='3rem 1rem'
+        padding='1rem'
         justifyContent='center'
       >
         <Heading
           level={2}
           fontSize={{ base: 'xxl', large: 'xxxl' }}
           fontWeight='bold'
+          marginTop='2rem'
         >
           Coming Soon
         </Heading>
@@ -148,6 +153,7 @@ export function Home() {
           width={{ base: '100%', large: '80%' }}
           marginTop='2rem'
           justifyContent='center'
+          wrap='wrap'
         >
           <Card padding='1.5rem' width={{ base: '100%', medium: '40%' }}>
             <FaPercent color='brand.primary.80' fontSize='3rem' />
@@ -172,6 +178,14 @@ export function Home() {
             </Flex>
           </Card>
         </Flex>
+      </Flex>
+      <Flex justifyContent='center' padding='1rem'>
+        <Text fontSize='1.125rem' alignItems='center' lineHeight='1.125rem'>
+          Made with <FaHeart color='red' /> &bull; by{' '}
+          <Link href='https://twitter.com/ra_jeeves' target='_blank'>
+            @ra_jeeves
+          </Link>
+        </Text>
       </Flex>
     </Flex>
   );
