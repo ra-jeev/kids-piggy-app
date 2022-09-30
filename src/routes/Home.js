@@ -93,7 +93,12 @@ export function Home() {
           justifyContent='center'
           wrap='wrap'
         >
-          <Card padding='1.5rem' width={{ base: '100%', medium: '33%' }}>
+          <Card
+            variation='elevated'
+            borderRadius='medium'
+            padding='1.5rem'
+            width={{ base: '100%', medium: '33%' }}
+          >
             <Icon
               as={MdSupervisorAccount}
               color='brand.primary.80'
@@ -108,7 +113,12 @@ export function Home() {
               </Text>
             </Flex>
           </Card>
-          <Card padding='1.5rem' width={{ base: '100%', medium: '33%' }}>
+          <Card
+            variation='elevated'
+            borderRadius='medium'
+            padding='1.5rem'
+            width={{ base: '100%', medium: '33%' }}
+          >
             <Icon
               as={MdSettingsInputAntenna}
               color='brand.primary.80'
@@ -124,7 +134,12 @@ export function Home() {
             </Flex>
           </Card>
 
-          <Card padding='1.5rem' width={{ base: '100%', medium: '33%' }}>
+          <Card
+            variation='elevated'
+            borderRadius='medium'
+            padding='1.5rem'
+            width={{ base: '100%', medium: '33%' }}
+          >
             <Icon as={MdMoney} color='brand.primary.80' fontSize='3rem' />
 
             <Flex direction='column' marginTop='2rem'>
@@ -157,7 +172,12 @@ export function Home() {
           justifyContent='center'
           wrap='wrap'
         >
-          <Card padding='1.5rem' width={{ base: '100%', medium: '40%' }}>
+          <Card
+            variation='elevated'
+            borderRadius='medium'
+            padding='1.5rem'
+            width={{ base: '100%', medium: '40%' }}
+          >
             <FaPercent color='#ffc600' fontSize='3rem' />
 
             <Flex direction='column' marginTop='2rem'>
@@ -168,7 +188,12 @@ export function Home() {
               </Text>
             </Flex>
           </Card>
-          <Card padding='1.5rem' width={{ base: '100%', medium: '40%' }}>
+          <Card
+            variation='elevated'
+            borderRadius='medium'
+            padding='1.5rem'
+            width={{ base: '100%', medium: '40%' }}
+          >
             <FaTasks color='#ffc600' fontSize='3rem' />
 
             <Flex direction='column' marginTop='2rem'>

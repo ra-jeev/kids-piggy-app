@@ -3,7 +3,7 @@ import { formatDate, formatCurrency } from '../utils';
 
 export const TransactionCard = ({ transaction, childName, currency }) => {
   return (
-    <Card borderRadius='medium'>
+    <Card borderRadius='medium' variation='elevated'>
       <Flex justifyContent='space-between'>
         <Flex direction='column' grow={1} gap='0.5rem'>
           <Heading level={6} color='font.tertiary'>

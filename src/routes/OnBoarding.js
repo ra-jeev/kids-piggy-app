@@ -153,6 +153,8 @@ export function OnBoarding() {
           padding={{ base: 'medium', large: 'xl' }}
           width='32rem'
           maxWidth='100%'
+          variation='elevated'
+          borderRadius='medium'
         >
           <Flex direction='column'>
             {userData ? (
@@ -197,7 +199,11 @@ export function OnBoarding() {
 
       {currentStep === 2 && (
         <Flex direction='column' width='32rem' maxWidth='100%'>
-          <Card padding={{ base: 'medium', large: 'xl' }}>
+          <Card
+            variation='elevated'
+            borderRadius='medium'
+            padding={{ base: 'medium', large: 'xl' }}
+          >
             <Heading level={4} fontSize={{ base: 'large', large: 'xl' }}>
               Set your currency
             </Heading>
@@ -225,7 +231,11 @@ export function OnBoarding() {
             </SelectField>
           </Card>
 
-          <Card padding={{ base: 'medium', large: 'xl' }}>
+          <Card
+            variation='elevated'
+            borderRadius='medium'
+            padding={{ base: 'medium', large: 'xl' }}
+          >
             <Flex direction='column' gap='1.5rem'>
               <Heading level={4} fontSize={{ base: 'large', large: 'xl' }}>
                 Add your kids' details

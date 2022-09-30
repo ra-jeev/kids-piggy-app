@@ -13,7 +13,7 @@ import { FaPiggyBank } from 'react-icons/fa';
 export function Toolbar({ loggedIn, onClick }) {
   return (
     <Flex height='4rem' alignItems='center'>
-      <Card width='100%'>
+      <Card variation='elevated' width='100%'>
         <Flex
           alignItems='center'
           position='relative'
