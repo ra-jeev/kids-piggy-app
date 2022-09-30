@@ -1,7 +1,8 @@
-import { useAuthenticator, Flex } from '@aws-amplify/ui-react';
+import { useAuthenticator, Flex, Text, Link } from '@aws-amplify/ui-react';
 import { useNavigate, Outlet } from 'react-router-dom';
 import { Toolbar } from './Toolbar';
 import { DataStore } from '@aws-amplify/datastore';
+import { FaHeart } from 'react-icons/fa';
 
 export function Layout() {
   const { route, signOut } = useAuthenticator((context) => [
@@ -20,7 +21,7 @@ export function Layout() {
   function handleClick(action) {
     switch (action) {
       case 'logo':
-        navigate(route !== 'authenticated' ? '/' : '/dashboard');
+        navigate('/');
         break;
       case 'dashboard':
         navigate('/dashboard');
@@ -41,9 +42,17 @@ export function Layout() {
   }
 
   return (
-    <Flex direction='column' minHeight='100vh'>
+    <Flex direction='column' minHeight='100vh' gap='0'>
       <Toolbar loggedIn={route === 'authenticated'} onClick={handleClick} />
       <Outlet />
+      <Flex justifyContent='center' padding='1rem'>
+        <Text fontSize='1.125rem'>
+          Made with <FaHeart color='red' />, by{' '}
+          <Link href='https://twitter.com/ra_jeeves' target='_blank'>
+            @ra_jeeves
+          </Link>
+        </Text>
+      </Flex>
     </Flex>
   );
 }
