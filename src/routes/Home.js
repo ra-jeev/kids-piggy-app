@@ -2,7 +2,6 @@ import {
   Flex,
   Heading,
   Text,
-  View,
   Image,
   Button,
   Card,
@@ -10,7 +9,6 @@ import {
 } from '@aws-amplify/ui-react';
 import { useNavigate } from 'react-router-dom';
 import heroImage from '../assets/images/hero-image.png';
-import savings from '../assets/images/savings.svg';
 import {
   MdSupervisorAccount,
   MdSettingsInputAntenna,
