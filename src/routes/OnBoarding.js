@@ -174,13 +174,14 @@ export function OnBoarding() {
             </Heading>
 
             <Text>
-              This app is meant to keep track of your kids' piggy money. It also
-              handles the auto credit of their pocket money (if any...) , as per
-              the schedule set by you.
+              This app is meant to keep track of your kids' piggy bank money. It
+              also handles the auto credit of their pocket money (if any...), as
+              per the schedule set by you.
             </Text>
 
             <Text marginBlock='1rem'>
-              As the next step we'll setup the app. We suggest that you{' '}
+              As the next step we'll configure the app for you. We suggest that
+              you{' '}
               <span style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>
                 complete this process with your kid(s).
               </span>
