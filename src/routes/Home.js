@@ -91,7 +91,7 @@ export function Home() {
           width={{ base: '100%', large: '80%' }}
           marginTop='2rem'
           justifyContent='center'
-          wrap='wrap'
+          wrap={{ base: 'wrap', medium: 'nowrap' }}
         >
           <Card
             variation='elevated'
