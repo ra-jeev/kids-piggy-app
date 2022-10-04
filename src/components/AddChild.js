@@ -26,7 +26,7 @@ export function AddChild({ data, index, onDataChange, onDelete }) {
   } = data;
 
   return (
-    <Card variation='outlined' backgroundColor='background.primary'>
+    <Card variation='outlined'>
       <Flex direction='column'>
         <Flex justifyContent='space-between' alignItems='center'>
           <Heading level={5}>{`Kid ${index + 1} details`}</Heading>
