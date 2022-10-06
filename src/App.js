@@ -16,11 +16,14 @@ import { OnBoarding } from './routes/OnBoarding';
 import { Dashboard } from './routes/Dashboard';
 import { Settings } from './routes/Settings';
 
-function MyRoutes() {
+function MyRoutes({ mode, onModeChange }) {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Layout />}>
+        <Route
+          path='/'
+          element={<Layout mode={mode} onModeChange={onModeChange} />}
+        >
           <Route index element={<Home />} />
           <Route
             path='/onboarding'
@@ -63,7 +66,10 @@ function App() {
   return (
     <ThemeProvider theme={theme} colorMode={colorMode}>
       <Authenticator.Provider>
-        <MyRoutes />
+        <MyRoutes
+          mode={colorMode}
+          onModeChange={(value) => setColorMode(value)}
+        />
       </Authenticator.Provider>
     </ThemeProvider>
   );

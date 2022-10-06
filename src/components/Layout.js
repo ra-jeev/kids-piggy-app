@@ -3,7 +3,7 @@ import { useNavigate, Outlet } from 'react-router-dom';
 import { Toolbar } from './Toolbar';
 import { DataStore } from '@aws-amplify/datastore';
 
-export function Layout() {
+export function Layout({ mode, onModeChange }) {
   const { route, signOut } = useAuthenticator((context) => [
     context.route,
     context.signOut,
@@ -17,7 +17,7 @@ export function Layout() {
     navigate('/');
   }
 
-  function handleClick(action) {
+  function handleClick(action, value) {
     switch (action) {
       case 'logo':
         navigate('/');
@@ -33,6 +33,9 @@ export function Layout() {
           navigate('/login');
         }
         break;
+      case 'mode':
+        onModeChange(value);
+        break;
       case 'logout':
         logOut();
       default: //Inetentional fallthrough on logout
@@ -42,7 +45,11 @@ export function Layout() {
 
   return (
     <Flex direction='column' minHeight='100vh' gap='0'>
-      <Toolbar loggedIn={route === 'authenticated'} onClick={handleClick} />
+      <Toolbar
+        mode={mode}
+        loggedIn={route === 'authenticated'}
+        onClick={handleClick}
+      />
       <Outlet />
     </Flex>
   );
