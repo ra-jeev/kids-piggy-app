@@ -7,10 +7,16 @@ import {
   Menu,
   MenuItem,
 } from '@aws-amplify/ui-react';
-import { MdAccountCircle } from 'react-icons/md';
+import {
+  MdAccountCircle,
+  MdDarkMode,
+  MdLightMode,
+  MdBrightnessAuto,
+  MdColorLens,
+} from 'react-icons/md';
 import { FaPiggyBank } from 'react-icons/fa';
 
-export function Toolbar({ loggedIn, onClick }) {
+export function Toolbar({ loggedIn, mode, onClick }) {
   return (
     <Flex height='4rem' alignItems='center'>
       <Card variation='elevated' width='100%'>
@@ -34,7 +40,32 @@ export function Toolbar({ loggedIn, onClick }) {
             </Text>
           </Flex>
 
-          <Flex>
+          <Flex alignItems='center'>
+            <Flex gap={0}>
+              <Menu
+                menuAlign='end'
+                trigger={
+                  <Button size='small'>
+                    <Icon
+                      fontSize='1.25rem'
+                      ariaLabel='Color mode selection'
+                      as={MdColorLens}
+                    />
+                  </Button>
+                }
+              >
+                <MenuItem onClick={() => onClick('mode', 'light')}>
+                  <MdLightMode style={{ marginRight: '0.5rem' }} /> Light
+                </MenuItem>
+                <MenuItem onClick={() => onClick('mode', 'dark')}>
+                  <MdDarkMode style={{ marginRight: '0.5rem' }} /> Dark
+                </MenuItem>
+                <MenuItem onClick={() => onClick('mode', 'system')}>
+                  <MdBrightnessAuto style={{ marginRight: '0.5rem' }} /> System
+                </MenuItem>
+              </Menu>
+            </Flex>
+
             {!loggedIn ? (
               <Button
                 variation='primary'
