@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import {
   Flex,
   Heading,
@@ -8,8 +10,6 @@ import {
   Icon,
   Link,
 } from '@aws-amplify/ui-react';
-import { useNavigate } from 'react-router-dom';
-import heroImage from '../assets/images/hero-image.png';
 import {
   MdSupervisorAccount,
   MdSettingsInputAntenna,
@@ -17,7 +17,9 @@ import {
 } from 'react-icons/md';
 import { FaPercent, FaTasks, FaHeart } from 'react-icons/fa';
 
-export function Home() {
+import heroImage from '../assets/images/hero-image.png';
+
+export function Home({ test }) {
   const navigate = useNavigate();
 
   return (

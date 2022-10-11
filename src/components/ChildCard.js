@@ -6,9 +6,9 @@ import {
   Text,
   Icon,
   Button,
-  Badge,
 } from '@aws-amplify/ui-react';
 import { MdAccountCircle, MdAddCircle, MdRemoveCircle } from 'react-icons/md';
+
 import { formatCurrency } from '../utils';
 
 export const ChildCard = ({ child, currency, onTransact }) => {

@@ -1,5 +1,6 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import {
   Flex,
   Heading,
@@ -10,11 +11,13 @@ import {
   SelectField,
   Card,
 } from '@aws-amplify/ui-react';
-import { AddChild } from '../components/AddChild';
-import { DataStore, Predicates } from '@aws-amplify/datastore';
-import { Child, User, Currency, Transaction } from '../models';
+import { DataStore } from '@aws-amplify/datastore';
 import { MdPersonAddAlt } from 'react-icons/md';
+
+import { AddChild } from '../components/AddChild';
+import { Child, User, Currency, Transaction } from '../models';
 import { calculateNextPayout } from '../utils';
+import { useUserObserver } from '../hooks/useUserObserver';
 
 export function OnBoarding() {
   const defaultChildProps = {
@@ -27,8 +30,7 @@ export function OnBoarding() {
     hasScheduleError: false,
   };
 
-  const [userData, setUserData] = useState(null);
-  const userSubscription = useRef(null);
+  const { user } = useUserObserver();
 
   const [currentStep, setCurrentStep] = useState(1);
   const [children, setChildren] = useState([{ ...defaultChildProps }]);
@@ -36,29 +38,10 @@ export function OnBoarding() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const observeUser = () => {
-      return DataStore.observeQuery(User, Predicates.ALL).subscribe(
-        (snapshot) => {
-          if (snapshot.items && snapshot.items.length) {
-            if (snapshot.items[0].onBoarded) {
-              navigate('/dashboard');
-            } else {
-              setUserData(snapshot.items[0]);
-            }
-          }
-        }
-      );
-    };
-
-    if (!userSubscription.current) {
-      userSubscription.current = observeUser();
+    if (user && user.onBoarded) {
+      navigate('/dashboard');
     }
-
-    return () => {
-      userSubscription.current.unsubscribe();
-      userSubscription.current = null;
-    };
-  }, [navigate]);
+  }, [navigate, user]);
 
   const finishOnBoarding = async () => {
     let hasError = false;
@@ -88,7 +71,7 @@ export function OnBoarding() {
     }
 
     await DataStore.save(
-      User.copyOf(userData, (item) => {
+      User.copyOf(user, (item) => {
         item.currency = currency.value;
         item.onBoarded = true;
       })
@@ -100,7 +83,7 @@ export function OnBoarding() {
         balance: child.balance ? parseFloat(child.balance) : 0,
         pocketMoney: child.pocketMoney ? parseFloat(child.pocketMoney) : 0,
         schedule: child.schedule,
-        userID: userData.id,
+        userID: user.id,
       };
 
       if (child.nextMoneyAt) {
@@ -113,7 +96,7 @@ export function OnBoarding() {
           new Transaction({
             amount: childData.balance,
             comment: '💰 Piggy bank created',
-            userID: userData.id,
+            userID: user.id,
             childID: res.id,
           })
         );
@@ -157,9 +140,9 @@ export function OnBoarding() {
           borderRadius='medium'
         >
           <Flex direction='column'>
-            {userData ? (
+            {user ? (
               <Heading level={2} fontSize={{ base: 'xxl', large: 'xxxl' }}>
-                Hi {userData.name} 👋,
+                Hi {user.name} 👋,
               </Heading>
             ) : (
               ''

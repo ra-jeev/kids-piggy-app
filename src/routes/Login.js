@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+
 import { Auth } from 'aws-amplify';
 import { Authenticator, useAuthenticator, Flex } from '@aws-amplify/ui-react';
-import { useNavigate, useLocation } from 'react-router-dom';
 import '@aws-amplify/ui-react/styles.css';
 
 export function Login() {

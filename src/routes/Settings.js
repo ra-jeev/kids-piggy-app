@@ -1,16 +1,17 @@
+import { useState } from 'react';
+
 import { Heading, Flex, Collection, Button, Icon } from '@aws-amplify/ui-react';
-import { DataStore, Predicates } from '@aws-amplify/datastore';
-import { Child, User } from '../models';
-import { useEffect, useState, useRef } from 'react';
 import { MdPersonAddAlt } from 'react-icons/md';
+
 import { EditableUser } from '../components/EditableUser';
 import { EditableChild } from '../components/EditableChild';
+import { useUserObserver } from '../hooks/useUserObserver';
+import { useChildrenObserver } from '../hooks/useChildrenObserver';
 
 export const Settings = () => {
-  const [userData, setUserData] = useState(null);
-  const [children, setChildren] = useState([]);
-  const childrenSubscription = useRef(null);
-  const userSubscription = useRef(null);
+  const { user } = useUserObserver();
+  const { children } = useChildrenObserver();
+
   const [addNew, setAddNew] = useState(false);
   const defaultChildProps = {
     name: '',
@@ -20,44 +21,6 @@ export const Settings = () => {
     nextMoneyAt: '',
   };
 
-  useEffect(() => {
-    const observeUser = () => {
-      return DataStore.observeQuery(User, Predicates.ALL).subscribe(
-        (snapshot) => {
-          setUserData(snapshot.items[0]);
-        }
-      );
-    };
-
-    if (!userSubscription.current) {
-      userSubscription.current = observeUser();
-    }
-
-    return () => {
-      userSubscription.current.unsubscribe();
-      userSubscription.current = null;
-    };
-  }, []);
-
-  useEffect(() => {
-    const observeChildren = () => {
-      return DataStore.observeQuery(Child, Predicates.ALL).subscribe(
-        (snapshot) => {
-          setChildren([...snapshot.items]);
-        }
-      );
-    };
-
-    if (!childrenSubscription.current) {
-      childrenSubscription.current = observeChildren();
-    }
-
-    return () => {
-      childrenSubscription.current.unsubscribe();
-      childrenSubscription.current = null;
-    };
-  }, []);
-
   return (
     <Flex
       direction='column'
@@ -65,14 +28,14 @@ export const Settings = () => {
       alignItems='center'
       padding='1rem'
     >
-      {userData && (
+      {user && (
         <Flex direction='column' width='32rem' maxWidth='100%'>
           <Heading level={4}>Your Settings</Heading>
-          <EditableUser user={userData} />
+          <EditableUser user={user} />
         </Flex>
       )}
 
-      {userData && children.length && (
+      {user && children.length && (
         <Flex direction='column' width='32rem' maxWidth='100%' marginTop='2rem'>
           <Flex justifyContent='space-between'>
             <Heading level={4}>Kids' Settings</Heading>
@@ -89,8 +52,8 @@ export const Settings = () => {
             <EditableChild
               isNew
               child={defaultChildProps}
-              currency={userData.currency}
-              userId={userData.id}
+              currency={user.currency}
+              userId={user.id}
               cancelAdd={() => setAddNew(false)}
             />
           )}
@@ -99,7 +62,7 @@ export const Settings = () => {
               <EditableChild
                 key={index}
                 child={item}
-                currency={userData.currency}
+                currency={user.currency}
               />
             )}
           </Collection>

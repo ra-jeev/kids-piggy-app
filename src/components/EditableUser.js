@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import {
   Flex,
   Heading,
@@ -9,9 +11,9 @@ import {
   SelectField,
 } from '@aws-amplify/ui-react';
 import { DataStore } from '@aws-amplify/datastore';
-import { User, Currency } from '../models';
-import { useEffect, useState } from 'react';
 import { MdEdit } from 'react-icons/md';
+
+import { User, Currency } from '../models';
 
 export const EditableUser = ({ user }) => {
   const [userEditable, setUserEditable] = useState(false);
