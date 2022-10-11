@@ -1,6 +1,6 @@
 import { Flex, Heading, Card, Text } from '@aws-amplify/ui-react';
 
-import { formatDate, formatCurrency } from '../utils';
+import { formatDateTime, formatCurrency } from '../utils';
 
 export const TransactionCard = ({ transaction, childName, currency }) => {
   return (
@@ -11,7 +11,7 @@ export const TransactionCard = ({ transaction, childName, currency }) => {
             {transaction.comment}
           </Heading>
           <Text color='neutral.80' fontSize='small'>
-            For {childName} &bull; {formatDate(transaction.createdAt)}
+            {childName} &bull; {formatDateTime(transaction.createdAt)}
           </Text>
         </Flex>
         <Heading
