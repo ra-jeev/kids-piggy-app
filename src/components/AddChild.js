@@ -12,7 +12,7 @@ import {
 import { MdDeleteOutline } from 'react-icons/md';
 
 import { Frequency } from '../models';
-import { formatDate } from '../utils';
+import { formatDateTime } from '../utils';
 
 export function AddChild({ data, index, onDataChange, onDelete }) {
   const {
@@ -97,7 +97,7 @@ export function AddChild({ data, index, onDataChange, onDelete }) {
           <Alert variation='info' hasIcon={true}>
             Next payout will be on{' '}
             <span style={{ fontWeight: 'bold' }}>
-              {formatDate(nextMoneyAt)}
+              {formatDateTime(nextMoneyAt)}
             </span>
             {'. '}
             <Text fontSize='xs' color='font.info'>

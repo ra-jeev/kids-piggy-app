@@ -1,6 +1,7 @@
 import { Frequency } from './models';
 
 let dateFormatter,
+  dateTimeFormatter,
   currencyFormatter = {};
 
 const formatDate = (dateString) => {
@@ -13,12 +14,28 @@ const formatDate = (dateString) => {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
+    });
+  }
+
+  return dateFormatter.format(new Date(dateString));
+};
+
+const formatDateTime = (dateString) => {
+  if (!dateString) {
+    return '';
+  }
+
+  if (!dateTimeFormatter) {
+    dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
       hour: 'numeric',
       minute: 'numeric',
     });
   }
 
-  return dateFormatter.format(new Date(dateString));
+  return dateTimeFormatter.format(new Date(dateString));
 };
 
 const formatCurrency = (amount, currency) => {
@@ -59,4 +76,4 @@ const calculateNextPayout = (schedule) => {
   return '';
 };
 
-export { formatDate, formatCurrency, calculateNextPayout };
+export { formatDate, formatDateTime, formatCurrency, calculateNextPayout };

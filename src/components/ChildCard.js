@@ -9,7 +9,7 @@ import {
 } from '@aws-amplify/ui-react';
 import { MdAccountCircle, MdAddCircle, MdRemoveCircle } from 'react-icons/md';
 
-import { formatCurrency } from '../utils';
+import { formatCurrency, formatDate } from '../utils';
 
 export const ChildCard = ({ child, currency, onTransact }) => {
   return (
@@ -19,9 +19,9 @@ export const ChildCard = ({ child, currency, onTransact }) => {
           <Icon
             ariaLabel='person icon'
             as={MdAccountCircle}
-            fontSize={{ base: '4rem', large: '6rem' }}
+            fontSize={{ base: '4rem', large: '5rem' }}
           />
-          <Flex direction='column' gap='0.5rem'>
+          <Flex direction='column' gap='0.25rem'>
             <Heading level={4} fontSize={{ base: 'large', large: 'xl' }}>
               {child.name}
             </Heading>
@@ -35,21 +35,35 @@ export const ChildCard = ({ child, currency, onTransact }) => {
             </Text>
           </Flex>
         </Flex>
-        <Flex alignItems='center' marginBlock='1rem'>
-          <Heading level={1}>💰</Heading>
-          <View>
-            <Text color='neutral.80' fontSize='small'>
-              Current balance
-            </Text>
-            <Heading
-              level={2}
-              color='brand.primary.80'
-              fontSize={{ base: 'xxl', large: 'xxxl' }}
-            >
-              {formatCurrency(child.balance, currency)}
+        <View marginBlock='1rem'>
+          <Flex alignItems='center'>
+            <Heading fontSize={{ base: '3rem', large: '4rem' }} lineHeight='1'>
+              💰
             </Heading>
-          </View>
-        </Flex>
+            <View>
+              <Text variation='info' fontSize='small'>
+                Current balance
+              </Text>
+              <Heading
+                level={2}
+                color='brand.primary.80'
+                fontSize={{ base: 'xxl', large: 'xxxl' }}
+              >
+                {formatCurrency(child.balance, currency)}
+              </Heading>
+            </View>
+          </Flex>
+          {child.nextMoneyAt && (
+            <Text variation='info' fontSize='small'>
+              Next credit:{' '}
+              <span style={{ fontSize: '1rem', fontWeight: 'bold' }}>
+                {formatCurrency(child.pocketMoney, currency)}{' '}
+              </span>{' '}
+              on {formatDate(child.nextMoneyAt * 1000)}
+            </Text>
+          )}
+        </View>
+
         <Flex>
           <Button
             gap={{ base: '0.25rem', medium: '0.5rem' }}
