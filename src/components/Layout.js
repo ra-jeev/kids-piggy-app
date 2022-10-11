@@ -1,7 +1,9 @@
-import { useAuthenticator, Flex } from '@aws-amplify/ui-react';
 import { useNavigate, Outlet } from 'react-router-dom';
-import { Toolbar } from './Toolbar';
+
+import { useAuthenticator, Flex } from '@aws-amplify/ui-react';
 import { DataStore } from '@aws-amplify/datastore';
+
+import { Toolbar } from './Toolbar';
 
 export function Layout({ mode, onModeChange }) {
   const { route, signOut } = useAuthenticator((context) => [

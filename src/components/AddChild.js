@@ -1,4 +1,3 @@
-// import { useState } from 'react';
 import {
   Flex,
   TextField,
@@ -11,6 +10,7 @@ import {
   Text,
 } from '@aws-amplify/ui-react';
 import { MdDeleteOutline } from 'react-icons/md';
+
 import { Frequency } from '../models';
 import { formatDate } from '../utils';
 

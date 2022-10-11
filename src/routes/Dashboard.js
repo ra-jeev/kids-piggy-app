@@ -1,67 +1,31 @@
-import { Flex, Heading, Collection } from '@aws-amplify/ui-react';
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { Flex, Heading, Collection } from '@aws-amplify/ui-react';
 import { DataStore, Predicates, SortDirection } from '@aws-amplify/datastore';
-import { Child, Transaction, User } from '../models';
+
+import { Transaction } from '../models';
 import { TransactionForm } from '../components/TransactionForm';
 import { ChildCard } from '../components/ChildCard';
 import { TransactionCard } from '../components/TransactionCard';
+import { useUserObserver } from '../hooks/useUserObserver';
+import { useChildrenObserver } from '../hooks/useChildrenObserver';
 
 export function Dashboard() {
-  const [children, setChildren] = useState([]);
   const [transactions, setTransactions] = useState([]);
-  const [userData, setUserData] = useState(null);
-
   const [currentTransaction, setCurrentTransaction] = useState(null);
-  const userSubscription = useRef(null);
-  const childrenSubscription = useRef(null);
   const transactionsSubscription = useRef(null);
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const observeUser = () => {
-      return DataStore.observeQuery(User, Predicates.ALL).subscribe(
-        (snapshot) => {
-          if (snapshot.items && snapshot.items.length) {
-            if (!snapshot.items[0].onBoarded) {
-              navigate('/onboarding');
-            } else {
-              setUserData(snapshot.items[0]);
-            }
-          }
-        }
-      );
-    };
-
-    if (!userSubscription.current) {
-      userSubscription.current = observeUser();
-    }
-
-    return () => {
-      userSubscription.current.unsubscribe();
-      userSubscription.current = null;
-    };
-  }, [navigate]);
+  const { user } = useUserObserver();
+  const { children } = useChildrenObserver();
 
   useEffect(() => {
-    const observeChildren = () => {
-      return DataStore.observeQuery(Child, Predicates.ALL).subscribe(
-        (snapshot) => {
-          setChildren([...snapshot.items]);
-        }
-      );
-    };
-
-    if (!childrenSubscription.current) {
-      childrenSubscription.current = observeChildren();
+    if (user && !user.onBoarded) {
+      navigate('/onboarding');
     }
-
-    return () => {
-      childrenSubscription.current.unsubscribe();
-      childrenSubscription.current = null;
-    };
-  }, []);
+  }, [navigate, user]);
 
   useEffect(() => {
     const observeTransactions = () => {
@@ -97,7 +61,7 @@ export function Dashboard() {
           onDismiss={() => setCurrentTransaction(null)}
         />
       ) : (
-        userData && (
+        user && (
           <Flex direction='column' width='32rem' maxWidth='100%'>
             <Heading level={3} textAlign='start'>
               Piggy bank accounts
@@ -107,7 +71,7 @@ export function Dashboard() {
                 <ChildCard
                   key={index}
                   child={item}
-                  currency={userData.currency}
+                  currency={user.currency}
                   onTransact={transact}
                 />
               )}
@@ -123,7 +87,7 @@ export function Dashboard() {
                   childName={
                     children.find((child) => child.id === item.childID)?.name
                   }
-                  currency={userData.currency}
+                  currency={user.currency}
                 />
               )}
             </Collection>
