@@ -6,6 +6,7 @@ import {
   Text,
   Icon,
   Button,
+  Alert,
 } from '@aws-amplify/ui-react';
 import { MdAccountCircle, MdAddCircle, MdRemoveCircle } from 'react-icons/md';
 
@@ -35,12 +36,9 @@ export const ChildCard = ({ child, currency, onTransact }) => {
             </Text>
           </Flex>
         </Flex>
-        <View marginBlock='1rem'>
+        <Flex marginBlock='1rem' alignItems='center' direction='column'>
           <Flex alignItems='center'>
-            <Heading fontSize={{ base: '3rem', large: '4rem' }} lineHeight='1'>
-              💰
-            </Heading>
-            <View>
+            <View textAlign='right'>
               <Text variation='info' fontSize='small'>
                 Current balance
               </Text>
@@ -52,17 +50,25 @@ export const ChildCard = ({ child, currency, onTransact }) => {
                 {formatCurrency(child.balance, currency)}
               </Heading>
             </View>
+            <Heading fontSize={{ base: '3rem', large: '4rem' }} lineHeight='1'>
+              💰
+            </Heading>
           </Flex>
           {child.nextMoneyAt && (
-            <Text variation='info' fontSize='small'>
-              Next credit:{' '}
-              <span style={{ fontSize: '1rem', fontWeight: 'bold' }}>
+            <Alert
+              variation='info'
+              isDismissible={false}
+              hasIcon={true}
+              fontSize='small'
+            >
+              Next Credit:{' '}
+              <span style={{ fontSize: 'medium', fontWeight: 'bold' }}>
                 {formatCurrency(child.pocketMoney, currency)}{' '}
               </span>{' '}
               on {formatDate(child.nextMoneyAt * 1000)}
-            </Text>
+            </Alert>
           )}
-        </View>
+        </Flex>
 
         <Flex>
           <Button
