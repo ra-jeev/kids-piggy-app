@@ -107,8 +107,14 @@
   "hosting": {
     "amplifyhosting": {
       "service": "amplifyhosting",
-      "type": "cicd",
-      "lastPushTimeStamp": "2022-09-28T10:41:52.160Z"
+      "type": "cicd"
+    }
+  },
+  "storage": {
+    "s3kidspiggyappstorage5d20e545": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
     }
   }
 }

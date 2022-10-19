@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.2.1",
     "aws-amplify": "^4.3.35",
     "react": "^18.2.0",
+    "react-cropper": "^2.1.8",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.4.0",
