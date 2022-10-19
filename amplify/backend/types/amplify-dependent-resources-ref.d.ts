@@ -30,5 +30,11 @@ export type AmplifyDependentResourcesAttributes = {
             "LambdaExecutionRole": "string",
             "CloudWatchEventRule": "string"
         }
+    },
+    "storage": {
+        "s3kidspiggyappstorage5d20e545": {
+            "BucketName": "string",
+            "Region": "string"
+        }
     }
 }

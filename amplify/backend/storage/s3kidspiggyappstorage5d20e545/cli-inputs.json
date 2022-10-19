@@ -1,0 +1,11 @@
+{
+  "resourceName": "s3kidspiggyappstorage5d20e545",
+  "bucketName": "kidspiggyapp-storage-5d20e545",
+  "policyUUID": "5e1a1df7",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ]
+}

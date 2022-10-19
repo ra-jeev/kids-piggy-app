@@ -15,6 +15,7 @@ type Child @model @auth(rules: [{allow: owner, ownerField: "userID"}, {allow: pr
   pocketMoney: Float
   schedule: Frequency
   nextMoneyAt: AWSTimestamp
+  photoUrlKey: String
 }
 
 enum Currency {

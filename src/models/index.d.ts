@@ -49,6 +49,7 @@ export declare class Child {
   readonly pocketMoney?: number | null;
   readonly schedule?: Frequency | keyof typeof Frequency | null;
   readonly nextMoneyAt?: number | null;
+  readonly photoUrlKey?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Child, ChildMetaData>);

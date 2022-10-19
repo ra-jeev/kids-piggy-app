@@ -169,6 +169,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "photoUrlKey": {
+                    "name": "photoUrlKey",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -369,5 +376,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "3d690a9ae8c16aae4045771c691322e4"
+    "version": "0283c63d5077b3a01e07edc59055b33d"
 };

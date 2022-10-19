@@ -8,13 +8,12 @@ import {
   MenuItem,
 } from '@aws-amplify/ui-react';
 import {
-  MdAccountCircle,
   MdDarkMode,
   MdLightMode,
   MdBrightnessAuto,
   MdColorLens,
 } from 'react-icons/md';
-import { FaPiggyBank } from 'react-icons/fa';
+import { FaPiggyBank, FaUserCircle } from 'react-icons/fa';
 
 export function Toolbar({ loggedIn, mode, onClick }) {
   return (
@@ -85,11 +84,7 @@ export function Toolbar({ loggedIn, mode, onClick }) {
                       padding='0'
                       borderRadius='xl'
                     >
-                      <Icon
-                        fontSize='2.5rem'
-                        ariaLabel='Account menu'
-                        as={MdAccountCircle}
-                      />
+                      <FaUserCircle fontSize='2.5rem' />
                     </Button>
                   }
                 >
