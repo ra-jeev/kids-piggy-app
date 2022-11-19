@@ -153,7 +153,7 @@ export function OnBoarding() {
               marginBlock='0.5rem'
               fontSize={{ base: 'large', large: 'xl' }}
             >
-              Welcome to Kids Piggy App.
+              Welcome to My Piggy Jar.
             </Heading>
 
             <Text>
