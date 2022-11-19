@@ -14,8 +14,8 @@
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
-    "emailVerificationSubject": "Your verification code for Kids Piggy App",
-    "emailVerificationMessage": "<div style=\"font-size: 1rem\">Hi,<br />Welcome to Kids Piggy App.<br /><br />To confirm your email, please enter the following verification code on the code verification screen of your device.<br /><br />Your Verification Code: <span style=\"font-size: 1.5rem; font-weight: 500\">{####}</span><br /><br />Thanks,<br />Team Kids Piggy App</div>",
+    "emailVerificationSubject": "Your verification code for My Piggy Jar App",
+    "emailVerificationMessage": "<div style=\"font-size: 1rem\">Hi,<br />Welcome to My Piggy Jar App.<br /><br />To confirm your email, please enter the following verification code on the code verification screen of your device.<br /><br />Your Verification Code: <span style=\"font-size: 1.5rem; font-weight: 500\">{####}</span><br /><br />Thanks,<br />Team My Piggy Jar App</div>",
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [
