@@ -1,4 +1,6 @@
 import { ModelInit, MutableModel } from "@aws-amplify/datastore";
+// @ts-ignore
+import { LazyLoading, LazyLoadingDisabled, AsyncCollection } from "@aws-amplify/datastore";
 
 export enum Frequency {
   DAILY = "DAILY",
@@ -28,7 +30,7 @@ type UserMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-export declare class Transaction {
+type EagerTransaction = {
   readonly id: string;
   readonly amount: number;
   readonly comment: string;
@@ -36,11 +38,25 @@ export declare class Transaction {
   readonly childID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<Transaction, TransactionMetaData>);
-  static copyOf(source: Transaction, mutator: (draft: MutableModel<Transaction, TransactionMetaData>) => MutableModel<Transaction, TransactionMetaData> | void): Transaction;
 }
 
-export declare class Child {
+type LazyTransaction = {
+  readonly id: string;
+  readonly amount: number;
+  readonly comment: string;
+  readonly userID: string;
+  readonly childID: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Transaction = LazyLoading extends LazyLoadingDisabled ? EagerTransaction : LazyTransaction
+
+export declare const Transaction: (new (init: ModelInit<Transaction, TransactionMetaData>) => Transaction) & {
+  copyOf(source: Transaction, mutator: (draft: MutableModel<Transaction, TransactionMetaData>) => MutableModel<Transaction, TransactionMetaData> | void): Transaction;
+}
+
+type EagerChild = {
   readonly id: string;
   readonly name: string;
   readonly balance: number;
@@ -52,11 +68,29 @@ export declare class Child {
   readonly photoUrlKey?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<Child, ChildMetaData>);
-  static copyOf(source: Child, mutator: (draft: MutableModel<Child, ChildMetaData>) => MutableModel<Child, ChildMetaData> | void): Child;
 }
 
-export declare class User {
+type LazyChild = {
+  readonly id: string;
+  readonly name: string;
+  readonly balance: number;
+  readonly userID: string;
+  readonly Transactions: AsyncCollection<Transaction>;
+  readonly pocketMoney?: number | null;
+  readonly schedule?: Frequency | keyof typeof Frequency | null;
+  readonly nextMoneyAt?: number | null;
+  readonly photoUrlKey?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Child = LazyLoading extends LazyLoadingDisabled ? EagerChild : LazyChild
+
+export declare const Child: (new (init: ModelInit<Child, ChildMetaData>) => Child) & {
+  copyOf(source: Child, mutator: (draft: MutableModel<Child, ChildMetaData>) => MutableModel<Child, ChildMetaData> | void): Child;
+}
+
+type EagerUser = {
   readonly id: string;
   readonly name: string;
   readonly email: string;
@@ -66,6 +100,22 @@ export declare class User {
   readonly onBoarded?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<User, UserMetaData>);
-  static copyOf(source: User, mutator: (draft: MutableModel<User, UserMetaData>) => MutableModel<User, UserMetaData> | void): User;
+}
+
+type LazyUser = {
+  readonly id: string;
+  readonly name: string;
+  readonly email: string;
+  readonly currency?: Currency | keyof typeof Currency | null;
+  readonly Transactions: AsyncCollection<Child>;
+  readonly Children: AsyncCollection<Child>;
+  readonly onBoarded?: boolean | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type User = LazyLoading extends LazyLoadingDisabled ? EagerUser : LazyUser
+
+export declare const User: (new (init: ModelInit<User, UserMetaData>) => User) & {
+  copyOf(source: User, mutator: (draft: MutableModel<User, UserMetaData>) => MutableModel<User, UserMetaData> | void): User;
 }
