@@ -2,6 +2,7 @@ import {
   Flex,
   Icon,
   Text,
+  Image,
   Button,
   Card,
   Menu,
@@ -13,7 +14,9 @@ import {
   MdBrightnessAuto,
   MdColorLens,
 } from 'react-icons/md';
-import { FaPiggyBank, FaUserCircle } from 'react-icons/fa';
+import { FaUserCircle } from 'react-icons/fa';
+
+import logo from '../assets/images/logo.png';
 
 export function Toolbar({ loggedIn, mode, onClick }) {
   return (
@@ -33,10 +36,7 @@ export function Toolbar({ loggedIn, mode, onClick }) {
             style={{ cursor: 'pointer' }}
             onClick={() => onClick('logo')}
           >
-            <FaPiggyBank fontSize='1.75rem' />
-            <Text fontWeight='extrabold' fontSize='large'>
-              KidsPiggy
-            </Text>
+            <Image alt='piggy bank logo' src={logo} maxHeight='40px' />
           </Flex>
 
           <Flex alignItems='center'>
