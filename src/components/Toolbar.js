@@ -67,6 +67,15 @@ export function Toolbar({ loggedIn, mode, onClick }) {
                 <MenuItem onClick={() => onClick('settings')}>
                   Settings
                 </MenuItem>
+                <MenuItem
+                  onClick={() =>
+                    window.open(
+                      'mailto:hello@mypiggyjar.com?subject=[MyPiggyJar]'
+                    )
+                  }
+                >
+                  Contact
+                </MenuItem>
                 <MenuItem onClick={() => onClick('logout')}>Logout</MenuItem>
               </Menu>
             </Flex>
