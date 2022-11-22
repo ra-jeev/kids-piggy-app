@@ -14,8 +14,9 @@ import { DataStore } from '@aws-amplify/datastore';
 import { MdEdit } from 'react-icons/md';
 
 import { User, Currency } from '../models';
+import { ColorModeSelector } from './ColorModeSelector';
 
-export const EditableUser = ({ user }) => {
+export const EditableUser = ({ user, mode, onModeChange }) => {
   const [userEditable, setUserEditable] = useState(false);
   const [result, setResult] = useState({ type: '', description: '' });
   const [userForm, setUserForm] = useState({
@@ -76,9 +77,13 @@ export const EditableUser = ({ user }) => {
       <Flex direction='column'>
         <Flex justifyContent='space-between' alignItems='center'>
           <Heading level={5}>You</Heading>
-          <Button padding='0.5rem' onClick={() => setUserEditable(true)}>
-            <Icon fontSize='1.25rem' ariaLabel='Edit user' as={MdEdit} />
-          </Button>
+          <Flex>
+            <ColorModeSelector mode={mode} onModeChange={onModeChange} />
+
+            <Button padding='0.5rem' onClick={() => setUserEditable(true)}>
+              <Icon fontSize='1.25rem' ariaLabel='Edit user' as={MdEdit} />
+            </Button>
+          </Flex>
         </Flex>
         <TextField
           label='Name'
