@@ -45,7 +45,7 @@ function MyRoutes({ mode, onModeChange }) {
             path='/settings'
             element={
               <AuthGuard>
-                <Settings />
+                <Settings mode={mode} onModeChange={onModeChange} />
               </AuthGuard>
             }
           />
@@ -57,19 +57,29 @@ function MyRoutes({ mode, onModeChange }) {
 }
 
 function App() {
-  const [colorMode, setColorMode] = useState('system');
+  const getSavedColorMode = () => {
+    return localStorage.getItem('color-mode') || 'system';
+  };
+
+  const saveColorMode = (value) => {
+    localStorage.setItem('color-mode', value);
+  };
+
+  const [colorMode, setColorMode] = useState(getSavedColorMode());
   const theme = {
     name: 'app-theme',
     overrides: [defaultDarkModeOverride],
   };
 
+  const onColorModeChange = (value) => {
+    saveColorMode(value);
+    setColorMode(value);
+  };
+
   return (
     <ThemeProvider theme={theme} colorMode={colorMode}>
       <Authenticator.Provider>
-        <MyRoutes
-          mode={colorMode}
-          onModeChange={(value) => setColorMode(value)}
-        />
+        <MyRoutes mode={colorMode} onModeChange={onColorModeChange} />
       </Authenticator.Provider>
     </ThemeProvider>
   );
