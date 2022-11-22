@@ -210,9 +210,13 @@ export function Home({ test }) {
       </Flex>
       <Flex justifyContent='center' padding='1rem'>
         <Text fontSize='1.125rem' alignItems='center' lineHeight='1.125rem'>
-          Made with <FaHeart color='red' /> &bull; by{' '}
+          Made with <FaHeart color='red' /> by{' '}
           <Link href='https://twitter.com/ra_jeeves' target='_blank'>
             @ra_jeeves
+          </Link>{' '}
+          &bull;{' '}
+          <Link href='mailto:hello@mypiggyjar.com?subject=[myPiggyJar]'>
+            Contact
           </Link>
         </Text>
       </Flex>
