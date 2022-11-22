@@ -8,7 +8,7 @@ import { EditableChild } from '../components/EditableChild';
 import { useUserObserver } from '../hooks/useUserObserver';
 import { useChildrenObserver } from '../hooks/useChildrenObserver';
 
-export const Settings = () => {
+export const Settings = ({ mode, onModeChange }) => {
   const { user } = useUserObserver();
   const { children } = useChildrenObserver();
 
@@ -31,7 +31,7 @@ export const Settings = () => {
       {user && (
         <Flex direction='column' width='32rem' maxWidth='100%'>
           <Heading level={4}>Your Settings</Heading>
-          <EditableUser user={user} />
+          <EditableUser mode={mode} onModeChange={onModeChange} user={user} />
         </Flex>
       )}
 
